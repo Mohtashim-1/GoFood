@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 8000
+const port = 4000
 const mongodb = require('./db')
 mongodb();
 app.get('/', (req, res) => {
@@ -8,9 +8,9 @@ app.get('/', (req, res) => {
 })
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.header(
-        'Access-Control-Allow-Header',
+        'Access-Control-Allow-Headers',
         'Origin, X-Requested-With, Content-Type, Accept'
     )
     next()
