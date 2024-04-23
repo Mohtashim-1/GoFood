@@ -26,7 +26,7 @@ router.post('/createuser', [
         }
         catch (error) {
             console.log(error)
-            res.json({ success: false, error })
+            res.json({ fail: false, error })
         }
     }
 )
