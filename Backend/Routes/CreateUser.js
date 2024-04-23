@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/User')
 const { body, validationResult } = require('express-validator');
 
-
+// create user route
 router.post('/createuser', [
     body('email', "Incorrect Email").isEmail(),
     body('name').isLength({ min: 5 }),
@@ -24,6 +24,27 @@ router.post('/createuser', [
             })
             res.json({ success: true })
         }
+        catch (error) {
+            console.log(error)
+            res.json({ fail: false, error })
+        }
+    }
+)
+
+// login route
+
+
+// create user route
+router.post('/loginuser', async (req, res) => {
+    let email = req.body.email
+        try {
+          let useremail =  await User.findOne(email)
+            if(!useremail){
+                return res.status(400).json({error:"Try Logging with correct credentials"})
+            }
+            }
+            
+        
         catch (error) {
             console.log(error)
             res.json({ fail: false, error })
