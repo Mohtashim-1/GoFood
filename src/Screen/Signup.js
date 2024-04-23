@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom'
 
 const Signup = () => {
     const [credentials, setcredentials] = useState({
-        name: "",
         email: "",
-        password: "",
-        geolocation: ""
+        password: ""
     });
 
 
@@ -18,16 +16,17 @@ const Signup = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: credentials.name,
                 email: credentials.email,
-                password: credentials.password,
-                location: credentials.geolocation
+                password: credentials.password
             })
 
         })
         const json = await response.json()
         console.log(json)
-        if (!json.success) {
+        if (json.success) {
+            alert('Good')
+        }
+        else if(!json.success) {
             alert('Enter Valid Credentials')
         }
     }
