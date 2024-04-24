@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+
 const Login = () => {
   const [credentials, setCredentials] = useState({
     email: "",
@@ -11,34 +12,26 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:4000/api/createuser", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: credentials.email,
-          password: credentials.password
-        })
-      });
+    const response = await fetch("http://localhost:4000/api/createuser", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password
+      })
+    });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch');
-      }
+    const json = await response.json();
+    console.log(json);
 
-      const json = await response.json();
-      console.log(json);
+    if (json.success) {
+      alert('Good');
 
-      if (json.success) {
-        alert('Good');
-        navigate('/');
-      } else {
-        alert('Enter Valid Credentials');
-      }
-    } catch (error) {
-      console.error('Error:', error.message);
-      alert('Failed to fetch. Please try again later.');
+      navigate('/');
+    } else {
+      alert('Enter Valid Credentials');
     }
   }
 
