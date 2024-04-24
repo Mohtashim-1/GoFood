@@ -1,15 +1,16 @@
-import { React, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-let navigate = useNavigate()
-const Login = () => {
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-  const [credentials, setcredentials] = useState({
+const Login = () => {
+  const [credentials, setCredentials] = useState({
     email: "",
     password: "",
-
   });
+
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const response = await fetch("http://localhost:4000/api/createuser", {
       method: 'POST',
       headers: {
@@ -19,32 +20,26 @@ const Login = () => {
         email: credentials.email,
         password: credentials.password
       })
+    });
 
-    })
-    const json = await response.json()
-    console.log(json)
+    const json = await response.json();
+    console.log(json);
+
     if (json.success) {
-      alert('Good')
-    }
-    else if (!json.success) {
-      alert('Enter Valid Credentials')
-    }
-    if (json.success) {
-      navigate('/')
+      alert('Good');
+      navigate('/');
+    } else {
+      alert('Enter Valid Credentials');
     }
   }
 
   const onChange = (event) => {
-    setcredentials({ ...credentials, [event.target.name]: event.target.value })
+    setCredentials({ ...credentials, [event.target.name]: event.target.value });
   }
-
-
 
   return (
     <div className='container'>
       <form onSubmit={handleSubmit}>
-
-
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
           <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email' value={credentials.email} onChange={onChange} />
@@ -54,7 +49,6 @@ const Login = () => {
           <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
           <input type="password" className="form-control" id="exampleInputPassword1" name='password' value={credentials.password} onChange={onChange} />
         </div>
-
         <div className="mb-3 form-check">
           <input type="checkbox" className="form-check-input" id="exampleCheck1" />
           <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
@@ -63,7 +57,7 @@ const Login = () => {
         <Link to="/createuser" className='btn btn-danger m-3'>I'm a new User</Link>
       </form>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
