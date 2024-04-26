@@ -5,11 +5,11 @@ const Login = () => {
     const [credentials, setcredentials] = useState({
         email: "",
         password: "",
-       
+
     });
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await fetch("http://localhost:4000/api/createuser", {
+        const response = await fetch("http://localhost:4000/api/loginuser", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ const Login = () => {
         if (json.success) {
             alert('Good')
         }
-        else if(!json.success) {
+        else if (!json.success) {
             alert('Enter Valid Credentials')
         }
     }
@@ -35,11 +35,11 @@ const Login = () => {
     }
 
 
-    
+
     return (
         <div className='container'>
             <form onSubmit={handleSubmit}>
-              
+
 
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
@@ -50,7 +50,7 @@ const Login = () => {
                     <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                     <input type="password" className="form-control" id="exampleInputPassword1" name='password' value={credentials.password} onChange={onChange} />
                 </div>
-              
+
                 <div className="mb-3 form-check">
                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
