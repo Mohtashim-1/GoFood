@@ -9,7 +9,7 @@ const Login = () => {
     });
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await fetch("http://localhost:4000/api/loginuser", {
+        const response = await fetch("http://localhost:4000/api/createuser", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -21,7 +21,7 @@ const Login = () => {
 
         })
         const json = await response.json()
-        console.log(json)
+        con
         if (json.success) {
             alert('Good')
         }
